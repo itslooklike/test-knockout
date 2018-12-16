@@ -1,20 +1,53 @@
 import ko from 'knockout';
 import '../node_modules/muicss/dist/css/mui.css';
 
-const costumer = {
-  name: ko.observable('Гость'),
-};
+class Customer {
+  constructor() {
+    this._name = ko.observable('Гость');
+    this._city = ko.observable('Москва');
+    this.info = ko.computed(() => `Привет ${this.name} я из ${this.city}`);
+  }
 
-const btn = document.querySelector('#nameButton');
-const input = document.querySelector('#nameInput');
+  get name() {
+    return this._name();
+  }
+
+  set name(newName) {
+    this._name(newName);
+  }
+
+  get city() {
+    return this._city();
+  }
+
+  set city(newName) {
+    this._city(newName);
+  }
+}
+
 const mainForm = document.querySelector('#mainForm');
 
-mainForm.addEventListener('submit', (evt) => evt.preventDefault());
-
-btn.addEventListener('click', (evt) => {
+mainForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  costumer.name(input.value.trim());
-  input.value = '';
+
+  const onlyInputs = [...evt.target.elements].filter(({ nodeName }) => nodeName === 'INPUT');
+
+  onlyInputs.forEach((input) => {
+    const { value, name } = input;
+    const trimmedValue = value.trim();
+
+    if (!trimmedValue) return;
+
+    if (name === 'nameInput') {
+      customer.name = trimmedValue;
+      input.value = '';
+    } else if (name === 'cityInput') {
+      customer.city = trimmedValue;
+      input.value = '';
+    }
+  });
 });
 
-ko.applyBindings(costumer);
+const customer = new Customer();
+
+ko.applyBindings(customer);
