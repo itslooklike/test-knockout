@@ -9,11 +9,47 @@
   </head>
   <body>
     <div class="mui-container">
-      <h1 data-bind="text:info"></h1>
+      <h1 data-bind="text: info"></h1>
+      <div>
+        <button data-bind="click: addCourse" class="mui-btn mui-btn--primary">Добавить</button>
+      </div>
       <form id="mainForm" class="mui-form--inline">
         <div class="mui-textfield"><input type="text" name="nameInput" /></div>
         <div class="mui-textfield"><input type="text" name="cityInput" /></div>
         <div><button class="mui-btn mui-btn--primary" type="submit">Обновить</button></div>
+        <hr />
+        <div>
+          <table>
+            <tbody data-bind="foreach: coursesList">
+              <tr>
+                <td data-bind="text: $index"></td>
+                <td data-bind="text: title"></td>
+                <td data-bind="text: price"></td>
+                <td>
+                  <button data-bind="click: $root.deleteCourse" class="mui-btn mui-btn--primary">
+                    delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr />
+        <div>
+          <table>
+            <tbody data-bind="foreach: {data: coursesList, includeDestroyed: true}">
+              <tr>
+                <td data-bind="text: title"></td>
+                <td data-bind="text: price"></td>
+                <td>
+                  <button data-bind="click: $root.deleteCourse" class="mui-btn mui-btn--primary">
+                    delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </form>
     </div>
   </body>

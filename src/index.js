@@ -1,11 +1,28 @@
 import ko from 'knockout';
+import casual from 'casual-browserify';
 import '../node_modules/muicss/dist/css/mui.css';
+
+function Course(title, price) {
+  this.title = ko.observable(title);
+  this.price = ko.observable(price);
+}
 
 class Customer {
   constructor() {
     this._name = ko.observable('Гость');
     this._city = ko.observable('Москва');
     this.info = ko.computed(() => `Привет ${this.name} я из ${this.city}`);
+    this.coursesList = ko.observableArray([
+      new Course('HTML', casual.uuid),
+      new Course('CSS', casual.uuid),
+      new Course('JS', casual.uuid),
+      new Course('REACT', casual.uuid),
+    ]);
+    this.deleteCourse = (course) => {
+      // this.coursesList.remove(course);
+      this.coursesList.destroy(course);
+    };
+    this.addCourse = () => this.coursesList.push(new Course(casual.word, casual.uuid));
   }
 
   get name() {
