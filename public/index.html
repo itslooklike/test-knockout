@@ -22,8 +22,10 @@
           <table>
             <tbody data-bind="foreach: coursesList">
               <tr>
-                <td data-bind="text: $index"></td>
-                <td data-bind="text: title"></td>
+                <td data-bind="if: $index() % 2 != 0">
+                  <span data-bind="text: $index() + 1"></span>
+                </td>
+                <td data-bind="text: $data.title"></td>
                 <td data-bind="text: price"></td>
                 <td>
                   <button data-bind="click: $root.deleteCourse" class="mui-btn mui-btn--primary">
