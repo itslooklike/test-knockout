@@ -40,6 +40,11 @@ class Customer {
   set city(newName) {
     this._city(newName);
   }
+
+  handleSimpleClick = (model, event) => {
+    console.log(model);
+    console.log(event);
+  };
 }
 
 const mainForm = document.querySelector('#mainForm');
