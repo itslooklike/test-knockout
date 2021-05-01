@@ -19,8 +19,8 @@ class Customer {
       new Course('REACT', casual.uuid),
     ]);
     this.deleteCourse = (course) => {
-      // this.coursesList.remove(course);
-      this.coursesList.destroy(course);
+      this.coursesList.remove(course);
+      // this.coursesList.destroy(course);
     };
     this.addCourse = () => this.coursesList.push(new Course(casual.word, casual.uuid));
   }
